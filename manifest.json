@@ -11,11 +11,13 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "https://www.netflix.com/*",
     "storage"
   ],
+  "host_permissions": [
+    "https://www.netflix.com/*/*"
+  ],
   "background": {
-    "page": "background.html"
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {

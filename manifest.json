@@ -17,12 +17,15 @@
     "https://www.netflix.com/*/*"
   ],
   "background": {
-    "service_worker": "background.js"
-  },
+    "scripts": ["background.js"],
+    "persistent": false
+  }
+  ,
   "content_scripts": [
     {
       "matches": ["https://www.netflix.com/viewingactivity*"],
-      "js": ["jquery.js", "content_script.js"]
+      "js": ["content.js"]
     }
   ]
+  
 }

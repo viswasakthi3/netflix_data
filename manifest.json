@@ -1,19 +1,19 @@
 {
-  "manifest_version": 3,
-  "name": "Netflix Viewing Activity Extractor",
-  "version": "1.0",
-  "action": {
-      "default_popup": "popup.html"
-  },
-  "permissions": ["storage", "tabs"],
-  "host_permissions": ["https://www.netflix.com/*"],
-  "background": {
-      "service_worker": "background.js"
-  },
-  "content_scripts": [
-      {
-          "matches": ["https://www.netflix.com/*"],
-          "js": ["content.js"]
-      }
-  ]
+    "manifest_version": 3,
+    "name": "Netflix Viewing Activity Extractor",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": ["storage", "tabs", "scripting"],
+    "host_permissions": ["https://www.netflix.com/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.netflix.com/viewingactivity"],
+            "js": ["content.js"]
+        }
+    ]
 }

@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Netflix Viewing Activity Extractor",
+    "version": "1.0",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "permissions": ["storage", "tabs", "<all_urls>"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["jquery.js"],
+            "matches": ["<all_urls>"]
+        }
+    ]
+}

@@ -1,17 +1,31 @@
-function extractData() {
-    const viewingActivityData = [];
-    const viewingActivityItems = document.querySelectorAll(".retableRow");
-  
-    viewingActivityItems.forEach((item) => {
-      const title = item.querySelector(".title").innerText;
-      const date = item.querySelector(".date").innerText;
-  
-      viewingActivityData.push({ title, date });
-    });
-  
-    return viewingActivityData;
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.type === "fetchData") {
+      fetch('https://www.netflix.com/viewingactivity')
+          .then(response => response.text())
+          .then(htmlString => {
+              const parser = new DOMParser();
+              const htmlDocument = parser.parseFromString(htmlString, "text/html");
+              const rows = htmlDocument.querySelectorAll(".retableRow");
+              const data = [];
+
+              rows.forEach(row => {
+                  const dateElement = row.querySelector(".col.date");
+                  const titleElement = row.querySelector(".col.title a");
+
+                  if (dateElement && titleElement) {
+                      const date = dateElement.textContent.trim();
+                      const title = titleElement.textContent.trim();
+
+                      data.push({ date, title });
+                  }
+              });
+
+              sendResponse({ success: true, data });
+          })
+          .catch(error => {
+              sendResponse({ success: false });
+          });
+
+      return true; // Required for async sendResponse
   }
-  
-  const data = extractData();
-  console.log(data);
-  
+});

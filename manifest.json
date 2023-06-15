@@ -1,18 +1,23 @@
 {
-    "manifest_version": 3,
-    "name": "Netflix Viewing Activity Extractor",
+    "name": "Netflix Data",
     "version": "1.0",
+    "manifest_version": 3,
     "action": {
-        "default_popup": "popup.html"
+      "default_popup": "popup.html",
+      "default_icon": {
+        "48": "icon.png"
+      }
     },
-    "permissions": ["storage", "tabs"],
-    "background": {
-        "service_worker": "background.js"
-    },
-    "web_accessible_resources": [
-        {
-            "resources": ["jquery.js"],
-            "matches": ["<all_urls>"]
-        }
+    "permissions": [
+      "activeTab",
+      "tabs",
+      "https://www.netflix.com/*"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["https://www.netflix.com/viewingactivity*"],
+        "js": ["content_script.js"]
+      }
     ]
-}
+  }
+  

@@ -1,23 +1,26 @@
 {
-    "name": "Netflix Data",
-    "version": "1.0",
-    "manifest_version": 3,
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "48": "icon.png"
-      }
-    },
-    "permissions": [
-      "activeTab",
-      "tabs",
-      "https://www.netflix.com/*"
-    ],
-    "content_scripts": [
-      {
-        "matches": ["https://www.netflix.com/viewingactivity*"],
-        "js": ["content_script.js"]
-      }
-    ]
+  "name": "Netflix Data",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.netflix.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.netflix.com/viewingactivity*"],
+      "js": ["jquery.js", "content_script.js"]
+    }
+  ],
+  "background": {
+    "page": "background.html"
   }
-  
+}

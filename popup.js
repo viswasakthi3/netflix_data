@@ -1,5 +1,9 @@
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("exportButton").addEventListener("click", function () {
-    chrome.runtime.sendMessage({ action: "fetchViewingActivity" });
+document.getElementById('button').addEventListener('click', () => {
+  chrome.runtime.sendMessage({type: 'fetchData'}, response => {
+      if (response.success) {
+          console.log('Data fetched successfully');
+      } else {
+          console.log('Failed to fetch data');
+      }
   });
 });

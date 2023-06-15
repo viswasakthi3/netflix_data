@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === "fetchData") {
+  if (request.type === 'fetchData') {
       fetch('https://www.netflix.com/viewingactivity')
           .then(response => response.text())
           .then(htmlString => {
@@ -20,12 +20,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                   }
               });
 
-              sendResponse({ success: true, data });
+              chrome.storage.local.set({netflixData: data}, function() {
+                  console.log('Data saved in local storage');
+              });
+
+              sendResponse({success: true});
           })
           .catch(error => {
-              sendResponse({ success: false });
+              console.error('Failed to fetch data', error);
+              sendResponse({success: false});
           });
 
-      return true; // Required for async sendResponse
+      return true;  // Will respond asynchronously.
   }
 });

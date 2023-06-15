@@ -19,6 +19,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           }
         });
 
+        chrome.storage.local.set({ netflixData: data }, () => {
+          console.log("Data saved in local storage");
+        });
+
         sendResponse({ success: true, data });
       })
       .catch(error => {
